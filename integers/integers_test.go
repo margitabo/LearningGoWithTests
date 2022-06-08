@@ -24,5 +24,20 @@ func TestAdder(t *testing.T) {
 		//That's because we want it to print an integer rather than a string.
 		t.Errorf("expected '%d' but got '%d'", expected, sum)
 	}
+}
 
+func TestRepeat(t *testing.T) {
+	repeated := Repeat("a", 5)
+	expected := "aaaaa"
+
+	if repeated != expected {
+		t.Errorf("expected %q but got %q", expected, repeated)
+	}
+}
+
+//To run the benchmarks do go test -bench=.
+func BenchmarkRepeat(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Repeat("a", 6)
+	}
 }
