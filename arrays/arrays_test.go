@@ -22,9 +22,9 @@ func TestSum(t *testing.T) {
 }
 
 func TestSumAll(t *testing.T) {
-	got := SumAll([]int{1, 2}, []int{3, 4})
+	got := SumAll([]int{1, 2}, []int{3, 4}, []int{5, 6})
 
-	want := []int{3, 7}
+	want := []int{3, 7, 11}
 	//It's important to note that reflect.DeepEqual is not "type safe" -
 	//the code will compile even if you did something a bit silly.
 	//want := "blob"
@@ -36,4 +36,26 @@ func TestSumAll(t *testing.T) {
 		//Here, we are using the %v placeholder to print the "default" format, which works well for arrays
 		t.Errorf("got %d want %d given", got, want)
 	}
+}
+
+func TestSumAllTails(t *testing.T) {
+
+	checkSums := func(t testing.TB, got, want []int) {
+		t.Helper()
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
+	}
+
+	t.Run("make the sums of some slices", func(t *testing.T) {
+		got := SumAllTails([]int{1, 2}, []int{0, 9})
+		want := []int{2, 9}
+		checkSums(t, got, want)
+	})
+
+	t.Run("safely sum empty slices", func(t *testing.T) {
+		got := SumAllTails([]int{}, []int{3, 4, 5})
+		want := []int{0, 9}
+		checkSums(t, got, want)
+	})
 }
