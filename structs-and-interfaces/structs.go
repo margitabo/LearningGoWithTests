@@ -12,8 +12,8 @@ type Circle struct {
 }
 
 type Triangle struct {
-	Base  float64
-	Heigh float64
+	Base   float64
+	Height float64
 }
 
 //In Go interface resolution is implicit. If the type you pass in matches what the interface is asking for, it will compile.
@@ -31,7 +31,7 @@ func (c Circle) Area() float64 {
 }
 
 func (t Triangle) Area() float64 {
-	return t.Heigh * t.Base / 2
+	return t.Height * t.Base / 2
 }
 
 func (t Triangle) Perimeter() float64 {
